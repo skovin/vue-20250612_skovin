@@ -1,9 +1,29 @@
-import { defineComponent } from 'vue'
+import { computed, defineComponent, ref} from 'vue'
 
 export default defineComponent({
   name: 'CounterApp',
 
-  setup() {},
+  setup() {
+    const c = ref(0);
+    const incDisabled = computed(() => c.value >= 5);
+    const decDisabled = computed(() => c.value <= 0);
+
+    function inc() {
+      c.value++;
+    }
+
+    function dec() {
+      c.value--;
+    }
+
+    return {
+      c,
+      inc,
+      dec,
+      decDisabled,
+      incDisabled,
+    }
+  },
 
   template: `
     <div class="counter">
@@ -11,15 +31,18 @@ export default defineComponent({
         class="button button--secondary"
         type="button"
         aria-label="Decrement"
-        disabled
+        :disabled="decDisabled"
+        @click="dec"
       >➖</button>
 
-      <span class="count" data-testid="count">0</span>
+      <span class="count" data-testid="count">{{c}}</span>
 
       <button
         class="button button--secondary"
         type="button"
         aria-label="Increment"
+        :disabled="incDisabled"
+        @click="inc"
       >➕</button>
     </div>
   `,
