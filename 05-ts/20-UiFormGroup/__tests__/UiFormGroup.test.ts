@@ -35,6 +35,7 @@ async function lintComponentDefinePropsDeclaration(component: Component) {
   })
 
   const result = await eslint.lintFiles([component.__file])
+  // console.log (result[0]);  --- если здесь внимательно покопаться, можно увидеть не только текст ошибки, но и конкретную строку !
   return {
     success: result[0].errorCount === 0,
     message: result[0].messages[0]?.message,
