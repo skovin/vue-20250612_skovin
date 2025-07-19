@@ -23,6 +23,6 @@ function handleUpdate(newValue: SelectValue) {
   <UiContainer>
     <p>Выбрано: {{ selected }}</p>
     <!-- Если тип компонента будет некорректным, использование handleUpdate приведёт здесь к ошибке TS -->
-    <UiSelect v-model="selected" :options @update:model-value="handleUpdate" />
+    <UiSelect v-model="selected" :options @update:model-value="handleUpdate" xxx="yyy"/> <!-- strictTemplates не сработал !? -->
   </UiContainer>
 </template>

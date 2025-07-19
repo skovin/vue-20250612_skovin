@@ -1,5 +1,10 @@
 {
   "extends": "@shgk/vue-course-taskbook/configs/tsconfig.json",
   "include": ["**/*.ts", "**/*.js", "**/*.vue"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist"], 
+
+  //Странно, но эффекта не заметил. Добавление аттрибута xxx="yyy" к UiSelect в 05-ts/30-UiSelect/App.vue ничего не меняет
+  "vueCompilerOptions": {
+    "strictTemplates": true,
+  },
 }

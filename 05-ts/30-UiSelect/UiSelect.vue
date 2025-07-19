@@ -1,9 +1,34 @@
-<script setup lang="ts"></script>
+<script setup lang="ts" generic="T extends string">
+
+
+const props = defineProps<{
+
+  //Заменил на defineModel
+  //  modelValue: T,
+
+  options: {value: T; text: string}[],
+}>()
+ 
+// Заменил на defineModel
+// const emit = defineEmits<{   
+//   //Странно, но что бы я тут не написал: T, string и даже number! (при этом в App.vue в value в options пишу текст, но не number )
+//   //Всё срабатывает. Нет ошибок в IDE, нет ошибок в тестах и в runtime
+//   'update:modelValue': [value: T]
+// }>()
+
+const model = defineModel()
+
+</script>
 
 <template>
-  <select class="select">
-    <option value="value-1">One</option>
-    <option value="value-2">Two</option>
+
+<!-- Заменил на defineModel  -->
+<!-- select class="select" @change="$emit('update:modelValue', $event.target.value)"></select-->
+
+  <select class="select" v-model="model">
+    <option v-for="item in options" :value="item.value" :selected="modelValue === item.value">
+      {{ item.text }}
+    </option>
   </select>
 </template>
 
